@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                height: 100dvh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #222;
+                font-family: system-ui, sans-serif;
+            }
+            /* ===== 电梯盒 ===== */
+            .elevator {
+                width: 360px;
+                height: 600px;
+                position: relative;
+                overflow: hidden;
+                background: #cfcac5 url("../image/image01.png") center/cover;
+                border-radius: 6px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+                overflow: visible; /* 让门框和门可见 */
+            }
+            /* ===== 门框 ===== */
+            .door-box {
+                position: absolute;
+                left: 25%;
+                bottom: 120px;
+                width: 48%;
+                height: 60.5%;
+                cursor: pointer; /* 整个门区域可点 */
+                overflow: hidden;
+            }
+            /* ===== 每扇门 ===== */
+            .door_l,
+            .door_r {
+                position: absolute;
+                width: 50%;
+                height: 100%;
+                background: url("../image/image02.png") center/cover;
+                transition: transform 0.8s ease-in-out;
+            }
+            /* 初始：门关闭 */
+            .door_l {
+                left: 0;
+            }
+            .door_r {
+                right: 0;
+            }
+
+            /* ======= 开门状态：左右各移动 100% 自己宽度 ======= */
+            .elevator.open .door_l {
+                transform: translateX(-98%);
+            }
+            .elevator.open .door_r {
+                transform: translateX(98%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="elevator" id="elevator">
+            <div class="door-box" id="doorBox">
+                <div class="door_l"></div>
+                <div class="door_r"></div>
+            </div>
+        </div>
+        <script>
+            /* 点击门框 / 左门 / 右门，都切换 open 状态 */
+            document.getElementById("doorBox").addEventListener("click", () => {
+                document.getElementById("elevator").classList.toggle("open");
+            });
+        </script>
+    </body>
+</html>
